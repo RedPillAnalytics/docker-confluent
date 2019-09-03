@@ -20,3 +20,5 @@ RUN curl -O http://packages.confluent.io/archive/${CONFLUENT_BASE}/confluent-${C
 # install confluent cli
 && curl -L https://cnfl.io/cli | sh -s -- -b /usr/local/bin \
 && mkdir -p ${CONFLUENT_CURRENT}
+
+ENTRYPOINT confluent local start ksql-server
