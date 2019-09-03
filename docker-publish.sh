@@ -1,7 +1,8 @@
 #!/bin/bash
 INPUT_USERNAME=$1
 INPUT_PASSWORD=$2
-INPUT_REGISTRY=$3
+INPUT_SNAPSHOT=$3
+INPUT_REGISTRY=$4
 INPUT_NAME=`echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]'`
 
 # echo "Repository: ${INPUT_NAME}"
@@ -45,13 +46,10 @@ docker login -u ${INPUT_USERNAME} -p ${INPUT_PASSWORD} ${INPUT_REGISTRY}
 SHA_DOCKER_NAME="${INPUT_NAME}:${GITHUB_SHA}"
 docker build $CUSTOMDOCKERFILE -t ${DOCKERNAME} -t ${SHA_DOCKER_NAME} .
 
-# push the non-SHA version if this is not a PR
-if [ -z "$GITHUB_HEAD_REF" ]; then
-  docker push ${DOCKERNAME}
-fi
+docker push ${DOCKERNAME}
 
 # if either snapshot or a PR, then push the SHA version
-if [ "${INPUT_SNAPSHOT}" == "true" ] || ["$GITHUB_HEAD_REF" ]; then
+if [ "${INPUT_SNAPSHOT}" == "true" ]; then
   docker push ${SHA_DOCKER_NAME}
 fi
 
