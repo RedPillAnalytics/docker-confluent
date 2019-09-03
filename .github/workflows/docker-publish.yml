@@ -1,11 +1,13 @@
 name: Test Docker Gradle
-on: [pull_request, push]
+on:
+  push:
+    branches:
+    - master
+  pull_request:
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - name: Check PWD
-      run: pwd
     - name: Build and Publish Image
       run: ./docker-publish.sh ${{ secrets.DOCKER_USERNAME }} ${{ secrets.DOCKER_PASSWORD }}
