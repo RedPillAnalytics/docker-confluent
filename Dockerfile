@@ -10,15 +10,24 @@ ENV PATH "$PATH:/confluent/bin"
 
 # apt-get dependencies
 RUN apt-get update \
-&& apt-get upgrade -y \
-&& apt-get install wget curl zip -y
+    && apt-get upgrade -y \
+    && apt-get install wget curl zip -y
 
 # install confluent
 RUN curl -O http://packages.confluent.io/archive/${CONFLUENT_BASE}/confluent-${CONFLUENT_VERSION}-${SCALA_VERSION}.zip \
-&& unzip confluent-${CONFLUENT_VERSION}-${SCALA_VERSION}.zip \
-&& mv confluent-${CONFLUENT_VERSION} /confluent \
-# install confluent cli
-&& curl -L https://cnfl.io/cli | sh -s -- -b /usr/local/bin \
-&& mkdir -p ${CONFLUENT_CURRENT}
+    && unzip confluent-${CONFLUENT_VERSION}-${SCALA_VERSION}.zip \
+    && mv confluent-${CONFLUENT_VERSION} /confluent \
+    # install confluent cli
+    && curl -L https://cnfl.io/cli | sh -s -- -b /usr/local/bin \
+    && mkdir -p ${CONFLUENT_CURRENT}
 
-ENTRYPOINT confluent local start ksql-server
+ENTRYPOINT bash
+
+# ENTRYPOINT confluent local start ksql-server \
+#     && ksql-datagen bootstrap-server=localhost:9092 quickstart=clickstream_codes \
+#         format=json topic=clickstream_codes maxInterval=20 iterations=100 \
+#     && ksql-datagen bootstrap-server=localhost:9092 quickstart=clickstream_users \
+#         format=json topic=clickstream_codes maxInterval=10 iterations=1000 \
+#     && ksql-datagen bootstrap-server=localhost:9092 quickstart=clickstream \
+#         format=json topic=clickstream maxInterval=100 \         
+#     && bash
