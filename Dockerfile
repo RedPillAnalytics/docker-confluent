@@ -22,9 +22,9 @@ RUN curl -O http://packages.confluent.io/archive/${CONFLUENT_BASE}/confluent-com
     && mkdir -p ${CONFLUENT_CURRENT} \
     && confluent update
 
-RUN confluent local start kafka \
-    && ksql-datagen quickstart=clickstream_codes format=json topic=clickstream_codes maxInterval=20 iterations=100 > /dev/null  \
-    && ksql-datagen quickstart=clickstream_users format=json topic=clickstream_users maxInterval=10 iterations=1000 > /dev/null  \
-    && ksql-datagen quickstart=clickstream format=json topic=clickstream maxInterval=100 iterations=100000 > /dev/null
+RUN confluent local start kafka > /dev/null \
+    && ksql-datagen quickstart=clickstream_codes format=json topic=clickstream_codes maxInterval=5 iterations=100 > /dev/null  \
+    && ksql-datagen quickstart=clickstream_users format=json topic=clickstream_users maxInterval=5 iterations=1000 > /dev/null  \
+    && ksql-datagen quickstart=clickstream format=json topic=clickstream maxInterval=5 iterations=100000 > /dev/null
 
 ENTRYPOINT bash
