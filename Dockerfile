@@ -27,4 +27,4 @@ RUN confluent local start kafka > /dev/null \
     && ksql-datagen quickstart=clickstream_users format=json topic=clickstream_users maxInterval=5 iterations=1000 > /dev/null  \
     && ksql-datagen quickstart=clickstream format=json topic=clickstream maxInterval=5 iterations=100000 > /dev/null
 
-ENTRYPOINT bash
+ENTRYPOINT confluent local start
