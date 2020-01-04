@@ -1,11 +1,11 @@
 FROM adoptopenjdk:8-jdk-hotspot
 
-ENV CONFLUENT_HOME=/confluent
-ENV CONFLUENT_BASE=5.3
-ENV CONFLUENT_VERSION=5.3.0
-ENV SCALA_VERSION=2.12
-ENV CONFLUENT_CURRENT=/confluent/data
-ENV PATH "$PATH:.:/confluent/bin"
+ENV CONFLUENT_HOME=/confluent \
+    CONFLUENT_BASE=5.3 \
+    CONFLUENT_VERSION=5.3.1 \
+    SCALA_VERSION=2.12 \
+    CONFLUENT_CURRENT=/confluent/data \
+    PATH="$PATH:.:/confluent/bin"
 
 # apt-get dependencies
 RUN apt-get update \
