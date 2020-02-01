@@ -7,6 +7,6 @@ steps:
   - --single-snapshot
   - --context=./
   id: kaniko-build
-- name: gcr.io/$PROJECT_ID/confluent:$BRANCH_NAME
+- name: gcr.io/$PROJECT_ID/confluent:latest
   id: kaniko-test
 timeout: 3600s
