@@ -17,7 +17,7 @@ RUN curl -O http://packages.confluent.io/archive/${CONFLUENT_BASE}/confluent-com
     && unzip confluent-community-${CONFLUENT_VERSION}-${SCALA_VERSION}.zip \
     && mv confluent-${CONFLUENT_VERSION} /confluent \
     # install confluent cli
-    && curl -L https://cnfl.io/cli | sh -s -- -b /usr/local/bin \
+    && curl -L --http1.1 https://cnfl.io/cli | sh -s -- -b /usr/local/bin \
     && mkdir -p ${CONFLUENT_CURRENT} \
     && confluent update
 
