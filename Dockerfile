@@ -1,8 +1,8 @@
 FROM adoptopenjdk:8-jdk-hotspot
 
 ENV CONFLUENT_HOME=/confluent \
-    CONFLUENT_BASE=5.4 \
-    CONFLUENT_VERSION=5.4.1 \
+    CONFLUENT_BASE=5.5 \
+    CONFLUENT_VERSION=5.5.0 \
     SCALA_VERSION=2.12 \
     CONFLUENT_CURRENT=/confluent/data \
     PATH="$PATH:.:/confluent/bin"

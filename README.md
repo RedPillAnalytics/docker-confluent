@@ -1,8 +1,5 @@
-# docker-build
-A template repository for building docker images and publishing them to Docker Hub. At the moment, this uses GitHub Actions, but not sure of the longterm direction.
+# docker-confluent
+Builds a single-container image of the Confluent platform. This is useful in build environments where `docker-compose` is unavailable, such as Jenkins running in GKE.
 
-The following Github *secrets* are used as part of the build and publish process:
-
-**DOCKER_USER**: Used for loging into DockerHub.
-
-**DOCKER_PASSWORD**: Used for loging into DockerHub.
+## TODO
+Use the Confluent Operator in all GKE-based builds, to make this container unnecessary.
