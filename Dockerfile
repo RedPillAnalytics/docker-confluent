@@ -1,8 +1,8 @@
 FROM adoptopenjdk:8-jdk-hotspot
 
 ENV CONFLUENT_HOME=/confluent \
-    CONFLUENT_BASE=5.4 \
-    CONFLUENT_VERSION=5.4.1 \
+    CONFLUENT_BASE=5.5 \
+    CONFLUENT_VERSION=5.5.1 \
     SCALA_VERSION=2.12 \
     CONFLUENT_CURRENT=/confluent/data \
     PATH="$PATH:.:/confluent/bin"
@@ -24,7 +24,8 @@ RUN curl -O http://packages.confluent.io/archive/${CONFLUENT_BASE}/confluent-com
 RUN confluent local start kafka > /dev/null \
     && ksql-datagen quickstart=clickstream_codes format=json topic=clickstream_codes maxInterval=1 iterations=100 > /dev/null  \
     && ksql-datagen quickstart=clickstream_users format=json topic=clickstream_users maxInterval=1 iterations=1000 > /dev/null \
-    && ksql-datagen quickstart=clickstream format=json topic=clickstream maxInterval=1 iterations=100000 > /dev/null
+    && ksql-datagen quickstart=clickstream format=json topic=clickstream maxInterval=1 iterations=100000 > /dev/null \
+    && confluent local stop
 
 ADD entrypoint.sh .
 
